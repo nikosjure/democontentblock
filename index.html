@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Block</title>
+  <style>
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+    version 1.2
+  <div id="block-settings">
+    <div class="form-group">
+      <label>Number of Rows:</label>
+      <input type="range" id="rows" min="1" max="5" value="1">
+      <span id="rows-value">1</span>
+    </div>
+    <button id="generate">Generate Content</button>
+  </div>
+
+  <script src="blocksdk.js"></script>
+  <script>
+    const sdk = new window.sfdc.BlockSDK();
+
+    const rowsInput = document.getElementById('rows');
+    const rowsValue = document.getElementById('rows-value');
+
+    
+       // Update rows value display
+       rowsInput.addEventListener('input', () => {
+        rowsValue.textContent = rowsInput.value;
+      });
+    
+    document.getElementById('generate').addEventListener('click', () => {
+      const rows = rowsInput.value;
+
+      const images = [];
+      let html = '';
+
+    html += 'Hello <b>world</b><br>';
+    html += 'Hello %%=v(@firstname)=%%<br>';
+    html += 'Next is the contentblock<br>';
+    html += '%%=ContentBlockbyID("158017")=%% <br>';
+    html += 'did it work?<br>';
+
+
+      // Use setContent to save the HTML content
+      sdk.setContent(html);
+
+      // Use setData to save the image URLs
+      sdk.setData({ images });
+    });
+  </script>
+</body>
+</html>
