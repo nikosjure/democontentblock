@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-    version 1.6
+    version 1.7
   <div id="block-settings">
     <div class="form-group">
       <label>Number of Rows:</label>
@@ -40,15 +40,16 @@
       const images = [];
       let html = '';
 
-    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%%';
-    html += '%%[SET @locale = [Locale] ]%%';
-    html += '%%[SET @fornavn = [FirstName] ]%%';
-    html += '%%[SET @SubscriberKey = AttributeValue("ID")]%%';
-    html += '%%[SET @efternavn = AttributeValue("LastName")]%%';
-    html += 'locale: %%=v(@locale)=%% SubscriberKey: %%=v(@SubscriberKey)=%%';
-    html += '%%[IF @locale == "da_DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%%';
-    html += '%%[SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)]%% Raptoraccount: %%=v(@account)=%%';
-    html += '%%[IF @ConfigDE == "hummel_dynamic_header_footer_2023" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%%';
+    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%% <br>';
+    html += '%%[SET @locale = [Locale] ]%% <br>';
+    html += '%%[SET @fornavn = [FirstName] ]%%<br>';
+    html += '%%[SET @SubscriberKey = AttributeValue("ID")]%% <br>';
+    html += '%%[SET @efternavn = AttributeValue("LastName")]%% <br>';
+    html += 'locale: %%=v(@locale)=%% SubscriberKey: %%=v(@SubscriberKey)=%% <br>';
+    html += 'fornavn: %%=v(@fornavn)=%% efternavn: %%=v(@efternavn)=%% <br>';
+    html += '%%[IF @locale == "da_DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%% <br>';
+    html += '%%[SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)]%% Raptoraccount: %%=v(@account)=%% <br>';
+    html += '%%[IF @ConfigDE == "hummel_dynamic_header_footer_2023" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%% <br>';
     
     
       // Use setContent to save the HTML content
