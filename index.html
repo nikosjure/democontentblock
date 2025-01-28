@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-    version 1.8
+    version 1.9
   <div id="block-settings">
     <div class="form-group">
       <label>Number of Rows:</label>
@@ -52,7 +52,7 @@
     html += '%%[SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)]%% Raptoraccount: %%=v(@account)=%% <br>';
     html += '%%[IF @ConfigDE == "hummel_dynamic_header_footer_2023" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%% <br>';
     
-    html += '%%[var @contentBlockID set @contentBlockID = 5794]%% This is the block: %%=ContentBlockByID(@contentBlockID)=%%'
+    html += '%%[var @contentBlockID set @contentBlockID = 158127]%% This is the block: %%=ContentBlockByID(@contentBlockID)=%%'
     html += 'This is the block2: %%=ContentBlockByID(158127)=%%'
     html += 'This is the block3: %%=ContentBlockByID("158127")=%%'
     
