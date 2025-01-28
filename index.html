@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-    version 1.4
+    version 1.5
   <div id="block-settings">
     <div class="form-group">
       <label>Number of Rows:</label>
@@ -45,7 +45,9 @@
     html += '%%[SET @locale = [Locale] ]%%'
     html += '%%[SET @SubscriberKey = AttributeValue("ID")]%%'
     html += 'locale: %%=v(@locale)=%% SubscriberKey: %%=v(@SubscriberKey)=%%';
-    html += '%%[IF @locale == "da-DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%%';
+    html += '%%[IF @locale == "da_DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%%';
+    html += '%%[IF @ConfigDE == "da_DK" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%%';
+    
     
       // Use setContent to save the HTML content
       sdk.setContent(html);
