@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-    version 1.5
+    version 1.6
   <div id="block-settings">
     <div class="form-group">
       <label>Number of Rows:</label>
@@ -40,13 +40,15 @@
       const images = [];
       let html = '';
 
-    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%%   emailaddress2: emailaddr subscriberkey2: _subscriberkey';
-    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%%   emailaddress2: emailaddr subscriberkey2: _subscriberkey';
-    html += '%%[SET @locale = [Locale] ]%%'
-    html += '%%[SET @SubscriberKey = AttributeValue("ID")]%%'
+    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%%';
+    html += '%%[SET @locale = [Locale] ]%%';
+    html += '%%[SET @fornavn = [FirstName] ]%%';
+    html += '%%[SET @SubscriberKey = AttributeValue("ID")]%%';
+    html += '%%[SET @efternavn = AttributeValue("LastName")]%%';
     html += 'locale: %%=v(@locale)=%% SubscriberKey: %%=v(@SubscriberKey)=%%';
     html += '%%[IF @locale == "da_DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%%';
-    html += '%%[IF @ConfigDE == "da_DK" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%%';
+    html += '%%[SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)]%% Raptoraccount: %%=v(@account)=%%';
+    html += '%%[IF @ConfigDE == "hummel_dynamic_header_footer_2023" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%%';
     
     
       // Use setContent to save the HTML content
