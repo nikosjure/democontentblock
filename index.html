@@ -8,59 +8,149 @@
     .form-group {
       margin-bottom: 15px;
     }
+    .id-group {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Space between label and input */
+      margin-bottom: 8px; /* Ensures even spacing */
+    }
+    
+    
   </style>
 </head>
 <body>
-    version 1.9
+    version 1.0
   <div id="block-settings">
+    <h2>Settings</h2>
     <div class="form-group">
       <label>Number of Rows:</label>
       <input type="range" id="rows" min="1" max="5" value="1">
       <span id="rows-value">1</span>
     </div>
-    <button id="generate">Generate Content</button>
+
+    <div class="form-group">
+      <label>Layout:</label>
+      <select id="layout">
+        <option value="hummelmodelandpack02">hummelmodelandpack02</option>
+        <option value="model">Model</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Feed tracking:</label>
+      <input type="text" id="feedtracking">
+    </div>
+
+    <!-- manual product inputs  -->
+          <!-- First 10 ID fields (conditionally displayed) -->
+           <h2>Insert product ID's</h2>
+          <div id="conditional-ids">
+            <div id="product-group1" class="id-group"><label for="productid1">ID 1:</label><input type="text" id="productid1"></div>
+            <div id="product-group2" class="id-group"><label for="productid2">ID 2:</label><input type="text" id="productid2"></div>
+            <div id="product-group3" class="id-group"><label for="productid3">ID 3:</label><input type="text" id="productid3"></div>
+            <div id="product-group4" class="id-group"><label for="productid4">ID 4:</label><input type="text" id="productid4"></div>
+            <div id="product-group5" class="id-group"><label for="productid5">ID 5:</label><input type="text" id="productid5"></div>
+            <div id="product-group6" class="id-group"><label for="productid6">ID 6:</label><input type="text" id="productid6"></div>
+            <div id="product-group7" class="id-group"><label for="productid7">ID 7:</label><input type="text" id="productid7"></div>
+            <div id="product-group8" class="id-group"><label for="productid8">ID 8:</label><input type="text" id="productid8"></div>
+            <div id="product-group9" class="id-group"><label for="productid9">ID 9:</label><input type="text" id="productid9"></div>
+            <div id="product-group10" class="id-group"><label for="productid10">ID 10:</label><input type="text" id="productid10"></div>
+          </div>
+
+          <!-- Last 8 fields (always visible) -->
+          <div id="product-group11" class="id-group"><label for="productid11">Fallback 1:</label><input type="text" id="productid11"></div>
+          <div id="product-group12" class="id-group"><label for="productid12">Fallback 2:</label><input type="text" id="productid12"></div>
+          <div id="product-group13" class="id-group"><label for="productid13">Fallback 3:</label><input type="text" id="productid13"></div>
+          <div id="product-group14" class="id-group"><label for="productid14">Fallback 4:</label><input type="text" id="productid14"></div>
+          <div id="product-group15" class="id-group"><label for="productid15">Fallback 5:</label><input type="text" id="productid15"></div>
+          <div id="product-group16" class="id-group"><label for="productid16">Fallback 6:</label><input type="text" id="productid16"></div>
+          <div id="product-group17" class="id-group"><label for="productid17">Fallback 7:</label><input type="text" id="productid17"></div>
+          <div id="product-group18" class="id-group"><label for="productid18">Fallback 8:</label><input type="text" id="productid18"></div>
+
+
+
+
+    <button id="generate">Save settings</button>
   </div>
 
+  
   <script src="blocksdk.js"></script>
+
   <script>
     const sdk = new window.sfdc.BlockSDK();
 
     const rowsInput = document.getElementById('rows');
     const rowsValue = document.getElementById('rows-value');
-
+    const conditionalIds = document.getElementById('conditional-ids').children;
     
        // Update rows value display
        rowsInput.addEventListener('input', () => {
         rowsValue.textContent = rowsInput.value;
       });
+
+
+  // Function to update displayed ID fields based on rows
+  function updateIDFields() {
+    const rows = parseInt(rowsInput.value);
+    rowsValue.textContent = rows;
+
+    // Loop through the first 10 ID fields (ID1-ID10)
+    for (let i = 1; i <= 10; i++) {
+        const group = document.getElementById(`product-group${i}`);
+
+        if (i <= rows * 2) {
+            group.style.display = 'flex'; // Show the entire div
+        } else {
+            group.style.display = 'none'; // Hide the entire div
+        }
+    }
+
+    // Ensure the last 8 ID fields (ID11-ID18) are always visible
+    for (let i = 11; i <= 18; i++) {
+        const group = document.getElementById(`product-group${i}`);
+        group.style.display = 'flex';
+    }
+}
+
+    // Initial setup of rows
+    updateIDFields();
+
+    // Update when rows input changes
+    rowsInput.addEventListener('input', updateIDFields);
+    
     
     document.getElementById('generate').addEventListener('click', () => {
+      /* Get values from user selections */
       const rows = rowsInput.value;
+      const layout = document.getElementById('layout').value;
+      const feedtracking = document.getElementById('feedtracking').value;
+      const productid1 = document.getElementById('productid1').value;
+      const productid2 = document.getElementById('productid2').value;
 
-      const images = [];
+      //const images = [];
       let html = '';
 
-    
-    html += 'emailaddress: %%emailaddr%% subscriberkey: %%_subscriberkey%% <br>';
-    html += '%%[SET @locale = [Locale] ]%% <br>';
-    html += '%%[SET @fornavn = [FirstName] ]%%<br>';
-    html += '%%[SET @SubscriberKey = AttributeValue("ID")]%% <br>';
-    html += '%%[SET @efternavn = AttributeValue("LastName")]%% <br>';
-    html += 'locale: %%=v(@locale)=%% SubscriberKey: %%=v(@SubscriberKey)=%% <br>';
-    html += 'fornavn: %%=v(@fornavn)=%% efternavn: %%=v(@efternavn)=%% <br>';
-    html += '%%[IF @locale == "da_DK" THEN]%% Hello DK %%[ELSE]%% Hello other %%[ENDIF]%% <br>';
-    html += '%%[SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)]%% Raptoraccount: %%=v(@account)=%% <br>';
-    html += '%%[IF @ConfigDE == "hummel_dynamic_header_footer_2023" THEN]%% configDE er hummel_dynamic_header_footer_2023 %%[ELSE]%% configDE er noget andet %%[ENDIF]%% <br>';
-    
-    html += '%%[var @contentBlockID set @contentBlockID = 158127]%% This is the block: %%=ContentBlockByID(@contentBlockID)=%%'
-    html += 'This is the block2: %%=ContentBlockByID(158127)=%%'
-    html += 'This is the block3: %%=ContentBlockByID("158127")=%%'
-    
+    html += `number of rows ${rows} i alt<br>`;
+    html += `layout: ${layout}<br>`;
+    html += `feedtracking: ${feedtracking}<br>`;
+    html += `productid2: ${productid2}<br>`;
+
+    html += `%%[`;
+    html += `SET @prodRows = "${rows}"`;
+    html += `SET @layout = "${layout}"`;
+    html += `SET @feedtracking ='${feedtracking}"`;
+    html += `SET @account = lookup('Raptor_Configuration','Raptor Account ID','Locale',@locale)`;
+    html += `SET @baseURL = Concat("https://mailmerge.raptorsmartadvisor.com/GetImagesByProductIds/", @account, "/dk/", @layout, "/")`;
+    html += `]%%`;
+    html += `My baseurl: %%=v(@baseURL)=%%`;
+
+
+
       // Use setContent to save the HTML content
       sdk.setContent(html);
 
       // Use setData to save the image URLs
-      sdk.setData({ images });
+     // sdk.setData({ images });
     });
   </script>
 </body>
