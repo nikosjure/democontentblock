@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-    version 1.1
+    version 1.2
   <div id="block-settings">
     <h2>Settings</h2>
     <div class="form-group">
@@ -136,14 +136,14 @@
     html += `productid2: ${productid2}<br>`;
 
     html += `%%[`;
-    html += `SET @prodRows = "${rows}"`;
-    html += `SET @layout = "${layout}"`;
-    html += `SET @feedtracking ='${feedtracking}"`;
-    html += `SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale)`;
-    html += `SET @baseURL = Concat("https://mailmerge.raptorsmartadvisor.com/GetImagesByProductIds/", @account, "/dk/", @layout, "/")`;
-    html += `]%%`;
-    html += `My layout: %%=v(@layout)=%%`;
-    html += `My baseurl: %%=v(@baseURL)=%%`;
+    html += `SET @prodRows = "${rows}" `;
+    html += `SET @layout = "${layout}" `;
+    html += `SET @feedtracking ="${feedtracking}" `;
+    html += `SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale) `;
+    html += `SET @baseURL = Concat("https://mailmerge.raptorsmartadvisor.com/GetImagesByProductIds/", @account, "/dk/", @layout, "/") `;
+    html += `]%% `;
+    html += `My layout: %%=v(@layout)=%% `;
+    html += `My baseurl: %%=v(@baseURL)=%% `;
 
 
 
