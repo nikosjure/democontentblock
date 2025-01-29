@@ -124,27 +124,55 @@
       const rows = rowsInput.value;
       const layout = document.getElementById('layout').value;
       const feedtracking = document.getElementById('feedtracking').value;
-      const productid1 = document.getElementById('productid1').value;
-      const productid2 = document.getElementById('productid2').value;
+      const productIds = [];
+      for (let i = 1; i <= 18; i++) {
+        productIds.push(document.getElementById(`productid${i}`).value);
+      }
 
       //const images = [];
       let html = '';
-
-    html += `number of rows ${rows} i alt<br>`;
-    html += `layout: ${layout}<br>`;
-    html += `feedtracking: ${feedtracking}<br>`;
-    html += `productid2: ${productid2}<br>`;
-
     html += `%%[`;
+
     html += `SET @prodRows = "${rows}" `;
     html += `SET @layout = "${layout}" `;
     html += `SET @feedtracking ="${feedtracking}" `;
+ 
+    html += `SET @ID1 = "${productIds[0]}" `;
+    html += `SET @ID2 = "${productIds[1]}" `;
+    html += `SET @ID3 = "${productIds[2]}" `;
+    html += `SET @ID4 = "${productIds[3]}" `;
+    html += `SET @ID5 = "${productIds[4]}" `;
+    html += `SET @ID6 = "${productIds[5]}" `;
+    html += `SET @ID7 = "${productIds[6]}" `;
+    html += `SET @ID8 = "${productIds[7]}" `;
+    html += `SET @ID9 = "${productIds[8]}" `;
+    html += `SET @ID10 = "${productIds[9]}" `;
+    html += `SET @ID11 = "${productIds[10]}" `;
+    html += `SET @ID12 = "${productIds[11]}" `;
+    html += `SET @ID13 = "${productIds[12]}" `;
+    html += `SET @ID14 = "${productIds[13]}" `;
+    html += `SET @ID15 = "${productIds[14]}" `;
+    html += `SET @ID16 = "${productIds[15]}" `;
+    html += `SET @ID17 = "${productIds[16]}" `;
+    html += `SET @ID18 = "${productIds[17]}" `;
+    html += `SET @AliasRaptorProduct = CONCAT('Raptorfeed_manual', @feedtracking) `;
     html += `SET @account = lookup("Raptor_Configuration","Raptor Account ID","Locale",@locale) `;
+    html += `SET @IDS = Concat(@ID1,",",@ID2,",",@ID3,",",@ID4,",",@ID5,",",@ID6,",",@ID7,",",@ID8,",",@ID9,",",@ID10,",",@ID11,",",@ID12,",",@ID13,",",@ID15,",",@ID15,",",@ID16,",",@ID17,",",@ID18) `;
     html += `SET @baseURL = Concat("https://mailmerge.raptorsmartadvisor.com/GetImagesByProductIds/", @account, "/dk/", @layout, "/") `;
+    html += `SET @productQuery = Concat(".jpg?productIds=", @IDS) `;
+    
+    html += `FOR @row = 1 TO @prodRows DO `;
+    html += `SET @img1 = Concat(@baseURL, Add(Multiply(Subtract(@row, 1),2), 1), @productQuery) `;
+    html += `SET @url1 = Concat(@img1, "&redir=true") `;
+    html += `SET @img2 = Concat(@baseURL, Add(Multiply(Subtract(@row, 1), 2), 2), @productQuery) `;
+    html += `SET @url2 = Concat(@img2, "&redir=true") `;
     html += `]%% `;
-    html += `My layout: %%=v(@layout)=%% `;
-    html += `My baseurl: %%=v(@baseURL)=%% `;
-
+    html += `%%=ContentBlockbyID("158017")=%%`;
+    html += ` %%[ `;
+    html += `NEXT @row`;
+    html += `]%% `;
+    
+ 
 
 
       // Use setContent to save the HTML content
