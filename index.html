@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-    version 1.2
+    version 1.4
   <div id="block-settings">
     <h2>Settings</h2>
     <div class="form-group">
@@ -177,6 +177,11 @@
 
       // Use setContent to save the HTML content
       sdk.setContent(html);
+
+      // Use setSuperContent to show what is shown in the editor until a preview is generated
+      const preview = '<img src="https://github.com/nikosjure/democontentblock/blob/main/blockimage.png?raw=true" alt="" width="590" style="display: block; padding: 0px; text-align: center; border: 0px solid transparent; height: auto; width: 100%;">'
+      sdk.setSuperContent(preview);
+
 
       // Use setData to save the image URLs
      // sdk.setData({ images });
