@@ -1,0 +1,14 @@
+/* Your custom styles */
+.form-group {
+    margin-bottom: 15px;
+  }
+  
+  .id-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and input */
+    margin-bottom: 8px; /* Ensures even spacing */
+  }
+  
+/* Import Salesforce Lightning Design System */
+@import '@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css';

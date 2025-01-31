@@ -3,90 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Block</title>
-  <style>
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .id-group {
-      display: flex;
-      align-items: center;
-      gap: 10px; /* Space between label and input */
-      margin-bottom: 8px; /* Ensures even spacing */
-    }
-    
-    
-  </style>
+  <title>Raptor Recommendations</title>
+  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="https://www.lightningdesignsystem.com/assets/styles/salesforce-lightning-design-system.min.css">
 </head>
-<body>
-    version 1.4
-  <div id="block-settings">
-    <h2>Settings</h2>
-    <div class="form-group">
-      <label>Number of Rows:</label>
-      <input type="range" id="rows" min="1" max="5" value="1">
-      <span id="rows-value">1</span>
+<body class="slds-scope">
+  <div id="block-settings" class="slds-p-around_medium slds-box slds-theme_default">
+    <h1 class="slds-text-heading_large" style="padding-bottom: 12px;">Raptor Manual Products</h1>
+   <h2 class="slds-text-heading_medium">Settings</h2>
+    <!-- Number of Rows -->
+    <div class="slds-form-element">
+      <label class="slds-form-element__label" for="rows">Number of Rows:</label>
+      <div class="slds-form-element__control">
+        <input type="range" id="rows" class="slds-range" min="1" max="5" value="1" style="width: 100%;">
+      </div>
+      <div class="slds-text-body_regular">
+        <span id="rows-value">1</span>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label>Layout:</label>
-      <select id="layout">
-        <option value="hummelmodelandpack02">hummelmodelandpack02</option>
-        <option value="model">Model</option>
-      </select>
+    <!-- Layout Selection -->
+    <div class="slds-form-element">
+      <label class="slds-form-element__label" for="layout">Layout:</label>
+      <div class="slds-form-element__control">
+        <select id="layout" class="slds-select">
+          <option value="produktbillede">Billede</option>
+          <option value="produktnavn">Billede + Navn</option>
+          <option value="produktnavnpris">Billede + Navn + Pris</option>
+        </select>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label>Feed tracking:</label>
-      <input type="text" id="feedtracking">
+    <!-- Feed Tracking -->
+    <div class="slds-form-element">
+      <label class="slds-form-element__label" for="feedtracking">Feed tracking:</label>
+      <div class="slds-form-element__control">
+        <input type="text" id="feedtracking" class="slds-input">
+      </div>
     </div>
 
-    <!-- manual product inputs  -->
-          <!-- First 10 ID fields (conditionally displayed) -->
-           <h2>Insert product ID's</h2>
-          <div id="conditional-ids">
-            <div id="product-group1" class="id-group"><label for="productid1">ID 1:</label><input type="text" id="productid1"></div>
-            <div id="product-group2" class="id-group"><label for="productid2">ID 2:</label><input type="text" id="productid2"></div>
-            <div id="product-group3" class="id-group"><label for="productid3">ID 3:</label><input type="text" id="productid3"></div>
-            <div id="product-group4" class="id-group"><label for="productid4">ID 4:</label><input type="text" id="productid4"></div>
-            <div id="product-group5" class="id-group"><label for="productid5">ID 5:</label><input type="text" id="productid5"></div>
-            <div id="product-group6" class="id-group"><label for="productid6">ID 6:</label><input type="text" id="productid6"></div>
-            <div id="product-group7" class="id-group"><label for="productid7">ID 7:</label><input type="text" id="productid7"></div>
-            <div id="product-group8" class="id-group"><label for="productid8">ID 8:</label><input type="text" id="productid8"></div>
-            <div id="product-group9" class="id-group"><label for="productid9">ID 9:</label><input type="text" id="productid9"></div>
-            <div id="product-group10" class="id-group"><label for="productid10">ID 10:</label><input type="text" id="productid10"></div>
-          </div>
+  
 
-          <!-- Last 8 fields (always visible) -->
-          <div id="product-group11" class="id-group"><label for="productid11">Fallback 1:</label><input type="text" id="productid11"></div>
-          <div id="product-group12" class="id-group"><label for="productid12">Fallback 2:</label><input type="text" id="productid12"></div>
-          <div id="product-group13" class="id-group"><label for="productid13">Fallback 3:</label><input type="text" id="productid13"></div>
-          <div id="product-group14" class="id-group"><label for="productid14">Fallback 4:</label><input type="text" id="productid14"></div>
-          <div id="product-group15" class="id-group"><label for="productid15">Fallback 5:</label><input type="text" id="productid15"></div>
-          <div id="product-group16" class="id-group"><label for="productid16">Fallback 6:</label><input type="text" id="productid16"></div>
-          <div id="product-group17" class="id-group"><label for="productid17">Fallback 7:</label><input type="text" id="productid17"></div>
-          <div id="product-group18" class="id-group"><label for="productid18">Fallback 8:</label><input type="text" id="productid18"></div>
+    <!-- Product ID Inputs -->
+    <h2 class="slds-text-heading_medium slds-m-top_large">Insert product ID's</h2>
+    <div id="conditional-ids">
+      <!-- ID Fields (conditionally displayed) -->
+      <div id="product-group1" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid1" class="slds-text-title">ID1:</label><input type="text" id="productid1" class="slds-input"></div>
+      <div id="product-group2" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid2" class="slds-text-title">ID2:</label><input type="text" id="productid2" class="slds-input"></div>
+      <div id="product-group3" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid3" class="slds-text-title">ID3:</label><input type="text" id="productid3" class="slds-input"></div>
+      <div id="product-group4" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid4" class="slds-text-title">ID4:</label><input type="text" id="productid4" class="slds-input"></div>
+      <div id="product-group5" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid5" class="slds-text-title">ID5:</label><input type="text" id="productid5" class="slds-input"></div>
+      <div id="product-group6" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid6" class="slds-text-title">ID6:</label><input type="text" id="productid6" class="slds-input"></div>
+      <div id="product-group7" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid7" class="slds-text-title">ID7:</label><input type="text" id="productid7" class="slds-input"></div>
+      <div id="product-group8" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid8" class="slds-text-title">ID8:</label><input type="text" id="productid8" class="slds-input"></div>
+      <div id="product-group9" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid9" class="slds-text-title">ID9:</label><input type="text" id="productid9" class="slds-input"></div>
+      <div id="product-group10" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid10" class="slds-text-title">ID10:</label><input type="text" id="productid10" class="slds-input"></div>
+    </div>
 
+    <!-- Always Visible ID Fields (ID11 to ID18) -->
+    <div id="product-group11" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid11" class="slds-text-title">Fallback1:</label><input type="text" id="productid11" class="slds-input"></div>
+    <div id="product-group12" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid12" class="slds-text-title">Fallback2:</label><input type="text" id="productid12" class="slds-input"></div>
+    <div id="product-group13" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid13" class="slds-text-title">Fallback3:</label><input type="text" id="productid13" class="slds-input"></div>
+    <div id="product-group14" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid14" class="slds-text-title">Fallback4:</label><input type="text" id="productid14" class="slds-input"></div>
+    <div id="product-group15" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid15" class="slds-text-title">Fallback5:</label><input type="text" id="productid15" class="slds-input"></div>
+    <div id="product-group16" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid16" class="slds-text-title">Fallback6:</label><input type="text" id="productid16" class="slds-input"></div>
+    <div id="product-group17" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid17" class="slds-text-title">Fallback7:</label><input type="text" id="productid17" class="slds-input"></div>
+    <div id="product-group18" class="id-group slds-p-around_xx-small slds-grid slds-grid_vertical-align-center"><label for="productid18" class="slds-text-title">Fallback8:</label><input type="text" id="productid18" class="slds-input"></div>
 
-
-
-    <button id="generate">Save settings</button>
+ 
   </div>
-
   
   <script src="blocksdk.js"></script>
 
   <script>
+
+
+
+
+    
     const sdk = new window.sfdc.BlockSDK();
 
+    sdk.getData(function(data) {
+      document.getElementById('rows').value = data.rows || 1;
+      document.getElementById('rows-value').textContent = data.rows || 1;
+      document.getElementById('layout').value = data.layout || 'produktnavn';
+      document.getElementById('feedtracking').value = data.feedtracking || '';
+    
+      if (data.productIds) {
+          data.productIds.forEach((id, index) => {
+              const input = document.getElementById(`productid${index + 1}`);
+              if (input) input.value = id;
+          });
+      }
+    
+      updateIDFields(); // Ensure correct ID fields are displayed
+    });
+    
     const rowsInput = document.getElementById('rows');
     const rowsValue = document.getElementById('rows-value');
     const conditionalIds = document.getElementById('conditional-ids').children;
     
-       // Update rows value display
-       rowsInput.addEventListener('input', () => {
-        rowsValue.textContent = rowsInput.value;
-      });
+    // Initialize the layoutInput and feedtrackingInput variables
+    const layoutInput = document.getElementById('layout');
+    const feedtrackingInput = document.getElementById('feedtracking');
+    
+    // Add event listeners for slider (to update rows and ID fields dynamically)
+    rowsInput.addEventListener('input', () => {
+      rowsValue.textContent = rowsInput.value;
+      updateIDFields(); // Update ID fields whenever rows change
+      handleGenerate(); // Trigger the same logic as the button click when rows change
+    });
+    
+    // Add event listeners for other inputs to trigger logic whenever they change
+    layoutInput.addEventListener('change', handleGenerate);
+    feedtrackingInput.addEventListener('input', handleGenerate);
+    
+    // Add event listeners to all product ID inputs to trigger handleGenerate
+    for (let i = 1; i <= 18; i++) {
+      const productInput = document.getElementById(`productid${i}`);
+      if (productInput) {
+        productInput.addEventListener('input', handleGenerate);
+      }
+    }
+
+
+
 
 
   // Function to update displayed ID fields based on rows
@@ -112,18 +153,17 @@
     }
 }
 
-    // Initial setup of rows
-    updateIDFields();
+
 
     // Update when rows input changes
     rowsInput.addEventListener('input', updateIDFields);
     
     
-    document.getElementById('generate').addEventListener('click', () => {
-      /* Get values from user selections */
+    // Function to handle the generation of settings based on user inputs
+    function handleGenerate() {
       const rows = rowsInput.value;
-      const layout = document.getElementById('layout').value;
-      const feedtracking = document.getElementById('feedtracking').value;
+      const layout = layoutInput.value;
+      const feedtracking = feedtrackingInput.value;
       const productIds = [];
       for (let i = 1; i <= 18; i++) {
         productIds.push(document.getElementById(`productid${i}`).value);
@@ -173,7 +213,13 @@
     html += `]%% `;
     
  
-
+    sdk.setData({
+      rows,
+      layout,
+      feedtracking,
+      productIds
+    });
+    
 
       // Use setContent to save the HTML content
       sdk.setContent(html);
@@ -183,9 +229,12 @@
       sdk.setSuperContent(preview);
 
 
-      // Use setData to save the image URLs
-     // sdk.setData({ images });
-    });
+
+    }
+
+    // Initial setup of rows
+    updateIDFields();
+    
   </script>
 </body>
 </html>
